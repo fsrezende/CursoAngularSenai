@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="app/js/index-controller3.js"></script>
+    <script src="app/js/filters/filter3.js"></script>
+    <script src="app/js/service/alert-service.js"></script>
+    <script src="bower_components/angular-ui-growl/src/growl.js"></script>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-growl/css/growl.css">
+
+
+
+</head>
+<body ng-app="Projeto3" ng-controller="IndexController3">
+<script type="text/ng-template" id="error-messages">
+    <p ng-message="required">Campo Obrigatório</p>
+    <p ng-message="minlength">Campo Muito Curto</p>
+    <p ng-message="maxlength">Campo Muito Longo</p>
+    <p ng-message="email">Email Inválido</p>
+</script>
+    <div class="panel panel-default">
+        <div class="panel-heading">Cadastro de Pessoas</div>
+        <div class="panel-body">
+            <form novalidate name="meuFormulario" ng-submit="Salvar()">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="itNome">
+                                <label>Nome</label>
+                                <i style="color: red" class="fa fa-asterisk"></i>
+                            </label>
+                            <input type="text"
+                                class="form-control"
+                                name="itNome"
+                                id="itNome"
+                                ng-model="entidade.nome"
+                                required
+                                ng-minlength="3"
+                                ng-maxlength="15"
+                                >
+<!--
+                            <div ng-messages="meuFormulario.itNome.$error"
+                                 ng-show="meuFormulario.itNome.$dirty">
+                                <p ng-message="minlength">Campo muito curto</p>
+                                <p ng-message="maxlength">Campo muito longo</p>
+                                <p ng-message="required">Campo obrigatório</p>
+                            </div>
+-->
+                            <div class="help-block" ng-messages="meuFormulario.itNome.$error"
+                                ng-show="meuFormulario.itNome.$dirty">
+                                <div ng-messages-include="error-messages"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="itEmail">
+                                <label>Email</label>
+                                <i style="color: red" class="fa fa-asterisk"></i>
+                            </label>
+                            <input type="email"
+                                   class="form-control"
+                                   name="itEmail"
+                                   id="itEmail"
+                                   ng-model="entidade.email"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25"
+                            >
+
+                            <div ng-messages="meuFormulario.itEmail.$error"
+                                ng-show="meuFormulario.itEmail.$dirty">
+                                <div ng-messages-include="messages.html"></div>
+<!--
+                                <p ng-message="minlength">Campo muito curto</p>
+                                <p ng-message="maxlength">Campo muito longo</p>
+                                <p ng-message="required">Campo obrigatório</p>
+                                <p ng-message="email">Email Inválido</p>
+-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="itDtNascimento">
+                                <label>Data de Nascimento</label>
+                                <i style="color: red" class="fa fa-asterisk"></i>
+                            </label>
+                            <input type="date"
+                                   class="form-control"
+                                   name="itDtNascimento"
+                                   id="itDtNascimento"
+                                   ng-model="entidade.itDtNascimento"
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="25"
+                            >
+
+                            <div ng-messages="meuFormulario.itDtNascimento.$error"
+                                ng-show="meuFormulario.itDtNascimento.$dirty">
+                                <p ng-message="minlength">Campo muito curto</p>
+                                <p ng-message="maxlength">Campo muito longo</p>
+                                <p ng-message="required">Campo obrigatório</p>
+                                <p ng-message="email">Email Inválido</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                         <button type="submit" class="btn btn-primary" ng-click="salvar()"
+                                >Salvar
+                                <i class="fa fa-save"></i>
+                            </button>
+                    </div>
+                    <div class="col-sm-4">
+                            <button type="submit" class="btn btn-warning" ng-click="limpar()"
+                                 >Limpar
+                                <i class="fa fa-eraser"></i>
+                            </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <table class="table">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Dt. Nascimento</th>
+                            </tr>
+                            <tr ng-repeat="pessoa in listaDePessoas">
+                                <td ng-bind = "pessoa.nome | maiusculo"></td>
+                                <td ng-bind = "pessoa.email"></td>
+                                <td ng-bind="pessoa.itDtNascimento  | date:'dd/MM/yyyy'"></td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+
+        </div>
+
+
+        </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
